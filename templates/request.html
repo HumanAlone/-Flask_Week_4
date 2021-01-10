@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+<main class="container mt-5">
+    <div class="col-12 col-sm-10 col-lg-6 offset-lg-3 offset-sm-1">
+        <form action="/request_done/" class="card mb-5" method="POST">
+            <div class="card-body text-center pt-5">
+                <h1 class="h3 card-title mt-4 mb-2">Подбор преподавателя</h1>
+                <p class="px-5">Напишите, чего вам нужно и&nbsp;мы&nbsp;подберем отличных&nbsp;ребят</p>
+            </div>
+            <hr>
+            <div class="card-body mx-3">
+                <div class="row">
+                    <div class="col">
+                        <p>Какая цель занятий?</p>
+                        {% for subfield in form.client_goal %}
+                        <div>
+                            {{ subfield }}
+                            {{ subfield.label(class_="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col">
+                        <p>Сколько времени есть?</p>
+                        {% for subfield in form.client_time %}
+                        <div>
+                            {{ subfield }}
+                            {{ subfield.label(class_="form-check-label") }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="card-body mx-3">
+                {{ form.client_name.label("Вас зовут", class_='mb-1 mt-2') }}
+                {{ form.client_name(class_='form-control') }}
+                {{ form.client_phone.label("Ваш телефон", class_='mb-1 mt-2') }}
+                {{ form.client_phone(class_='form-control') }}
+                {{ form.hidden_tag() }}
+                <input type="submit" class="btn btn-primary mt-4 mb-2" value="Найдите мне преподавателя">
+            </div>
+        </form>
+    </div>
+</main>
+
+{% endblock %}
